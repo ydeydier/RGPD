@@ -48,8 +48,7 @@ class traitement {
 			$nomChamp=$champ->nomChamp;
 			$donnees=$this->donnees;
 			$donnee=$donnees[$nomChamp];
-			$typeInterface=$champ->typeInterface;
-			if ($typeInterface=="D") {
+			if ($champ->typeInterface=="D") {
 				$donnee=dateMySql($donnee);
 				$sql.=", ".$nomChamp."=$donnee";
 			} else {

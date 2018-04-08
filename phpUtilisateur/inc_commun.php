@@ -4,6 +4,7 @@
 	require_once "../phpCommun/fonctionsSql.php";
 	require_once "../classes/class.champ.php";
 	require_once "../classes/class.categorie.php";
+	require_once "../classes/class.intitule.php";
 	require_once "../classes/class.traitement.php";
 	require_once "../classes/class.utilisateur.php";
 	session_start();

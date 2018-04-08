@@ -5,14 +5,8 @@
 	foreach ($champs as $champ) {
 		$nomChamp=$champ->nomChamp;
 		$typeInterface=$champ->typeInterface;
-		if (($typeInterface=="U" || $typeInterface=="M" || $typeInterface=="D")) {
-			$donnee=$_POST["txt_$nomChamp"];
-			$donnees[$nomChamp]=$donnee;
-		}
-		if (($typeInterface=="ON") || ($typeInterface=="OK")){
-			$donnee=$_POST["cbo_$nomChamp"];
-			$donnees[$nomChamp]=$donnee;
-		}
+		$donnee=$_POST["txt_$nomChamp"];
+		$donnees[$nomChamp]=$donnee;
 	}
 	$traitement->update($champs, $utilisateur->login);
 	unset($_SESSION["traitement"]);

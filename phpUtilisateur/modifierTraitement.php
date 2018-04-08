@@ -43,25 +43,35 @@
 			$texteApres="";
 		}
 		
+		// Champ de type "Ligne (une unique ligne de texte)"
 		if ($typeInterface=="U") {
 			$HTMLchamp="<input size=\"$long\" type=\"text\" value=\"$donnee\" name=\"txt_$nomChamp\">$texteApres";
 		}
+		// Champ de type "Multiligne"
 		if ($typeInterface=="M") {
 			$HTMLchamp="<textarea rows=\"2\" cols=\"35\" name=\"txt_$nomChamp\">$donnee</textarea>";
 		}
+		// Champ de type "Liste"
+		if ($typeInterface=="L") {
+			$typeListe=$champ->typeListe;
+			$HTMLchamp ="<select name=\"txt_$nomChamp\">";
+			$HTMLchamp.="<option value=\"\"> - </option>";
+			$intitules = intitule::getIntitules($typeListe);
+			foreach ($intitules as $intitule) {
+				$libelleIntitule=$intitule->libelle;
+				if ($donnee==$libelleIntitule) {
+					$selected="SELECTED";
+				} else {
+					$selected="";
+				}
+				$HTMLchamp.="<option $selected value=\"$libelleIntitule\">$libelleIntitule</option>";
+			}
+			$HTMLchamp.="</select>";
+		}
+		// Champ de type "Date"
 		if ($typeInterface=="D") {
-			// Date
 			$HTMLchamp="<input size=\"10\" type=\"text\" value=\"$donnee\" name=\"txt_$nomChamp\"> (JJ/MM/AAAA)";
 		}
-		if ($typeInterface=="ON") {
-			// Oui / non
-			$HTMLchamp="<select name=\"cbo_$nomChamp\"><option value=\"-\"></option><option value=\"O\">OUI</option><option value=\"N\">NON</option></select>";
-		}
-		if ($typeInterface=="OK") {
-			// OK / KO
-			$HTMLchamp="<select name=\"cbo_$nomChamp\"><option value=\"-\"></option><option value=\"OK\">OK</option><option value=\"KO\">KO</option></select>";
-		}
-		
 		echo "<tr>";
 		echo "<th nowrap align=\"left\">$libelle<br><span class=\"description\">$description</span></th>";
 		echo "<td>$HTMLchamp</td>";

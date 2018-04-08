@@ -3,7 +3,8 @@ class champ {
 	var $nomChamp;
 	var $libelleChamp;
 	var $description;
-	var $typeInterface;
+	var $typeInterface;	// U=une ligne, M=multilignes, D=Date, L=Liste (liste définie par $typeListe)
+	var $typeListe;
 	var $tailleMax;
 	var $afficheDansListe;
 	var $idCategorie;
@@ -25,6 +26,7 @@ class champ {
 		$champ->libelleChamp=$row['libelleChamp'];
 		$champ->description=$row['description'];
 		$champ->typeInterface=$row['typeInterface'];
+		$champ->typeListe=$row['typeListe'];
 		$champ->tailleMax=$row['tailleMax'];
 		$champ->afficheDansListe=$row['afficheDansListe'];
 		$champ->idCategorie=$row['idCategorie'];
