@@ -9,14 +9,29 @@ class utilisateur {
 	var $administrateur;	// 'O' ou 'N'
 	
 	// TODO: LDAP, vérifier
-	static function charger($login) {
+	static function chargerDepuisBDD($login) {
 		$login=strtolower(trim($login));
 		$result = executeSqlSelect("SELECT * FROM utilisateur where lower(trim(login))='$login'");
 		$row = mysqli_fetch_array($result);
 		if ($row) {
-			$utilisateur = self::instanceDepuisSqlRow($row);
+			$utilisateur=self::instanceDepuisSqlRow($row);
 		} else {
 			$utilisateur=false;
+		}
+		return $utilisateur;
+	}
+
+	static function chargerDepuisLDAP($login, $passwordSaisi, $tConnexionLDAP) {
+		$login=strtolower(trim($login));
+		$retLdap=ldap::chargerDepuisLDAP($login, $passwordSaisi, $tConnexionLDAP);
+		$utilisateur=false;
+		if (sizeof($retLdap)>0) {
+			$utilisateur = new utilisateur();
+			$utilisateur->login=$login;
+			$utilisateur->password=$passwordSaisi;
+			$utilisateur->nom=$retLdap['nom'];
+			$utilisateur->prenom=$retLdap['prenom'];
+			$utilisateur->administrateur="N";
 		}
 		return $utilisateur;
 	}
@@ -24,8 +39,8 @@ class utilisateur {
 	static function instanceDepuisSqlRow($row) {
 		$utilisateur = new utilisateur();
 		$utilisateur->idUtilisateur=$row['idUtilisateur'];
-		$utilisateur->login=$row['login'];
-		$utilisateur->password=$row['password'];
+		$utilisateur->login=trim($row['login']);
+		$utilisateur->password=trim($row['password']);
 		$utilisateur->nom=$row['nom'];
 		$utilisateur->prenom=$row['prenom'];
 		$utilisateur->administrateur=$row['administrateur'];

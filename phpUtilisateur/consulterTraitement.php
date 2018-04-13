@@ -11,7 +11,7 @@
 <h1>Traitement : <?php echo $donnees['nom'];?></h1>
 <br><br><br>
 
-<table class="tableCommune">
+<table width="40%" class="tableCommune">
 <?php
 	$libelleCategoriePrecedent="";
 	foreach ($champs as $champ) {
@@ -26,8 +26,8 @@
 			$libelleCategoriePrecedent=$libelleCategorie;
 		}
 		echo "<tr>";
-		echo "<th nowrap align=\"left\">$libelle<br><span class=\"description\">$description</span></th>";
-		echo "<td width=\"300px\">$donnee</td>";
+		echo "<th width=\"40%\" align=\"left\">$libelle<br><span class=\"description\">$description</span></th>";
+		echo "<td width=\"60%\">$donnee</td>";
 		echo "</tr>";
 	}
 ?>

@@ -4,10 +4,10 @@
 ?>
 
 <CENTER>
-<br><br><br><br>
-<a class="menu" href="gererStocks.php">Gérer les stocks</a><br>
-<br><br>
-<a class="menu" href="gererUtilisateurs.php">Gérer les utilisateurs</a><br>
+<br><br><br><br><br>
+<a class="menu" href="consulterChamps.php">Gérer les champs</a><br>
+<br>
+<a class="menu" href="consulterIntitules.php">Gérer les intitulés</a><br>
 </CENTER>
 <?php
 	require "footer.php";

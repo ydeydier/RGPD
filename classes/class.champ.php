@@ -1,6 +1,7 @@
 <?php
 class champ {
 	var $nomChamp;
+	var $ordre;
 	var $libelleChamp;
 	var $description;
 	var $typeInterface;	// U=une ligne, M=multilignes, D=Date, L=Liste (liste définie par $typeListe)
@@ -23,6 +24,7 @@ class champ {
 	static function instanceDepuisSqlRow($row) {
 		$champ = new champ();
 		$champ->nomChamp=$row['nomChamp'];
+		$champ->ordre=$row['ordre'];
 		$champ->libelleChamp=$row['libelleChamp'];
 		$champ->description=$row['description'];
 		$champ->typeInterface=$row['typeInterface'];
@@ -34,6 +36,13 @@ class champ {
 		return $champ;
 	}
 	
+	function update() {
+		$libelleChamp=mysqlEscape($this->libelleChamp);
+		$description=mysqlEscape($this->description);
+		$sql="update champ set ordre=$this->ordre, libelleChamp='$libelleChamp', description='$description', typeInterface='$this->typeInterface', typeListe='$this->typeListe', tailleMax=$this->tailleMax, afficheDansListe='$this->afficheDansListe', idCategorie=$this->idCategorie, masque='$this->masque' where nomChamp='$this->nomChamp'";
+		executeSql($sql);
+	}
+
 	function bAfficheDansListe() {
 		return ($this->afficheDansListe=="O");
 	}

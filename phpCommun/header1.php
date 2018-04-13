@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <HEAD>
-<TITLE>RGPD - Registre des traitements</TITLE>
+<TITLE>RTR - Registre des traitements RGPD</TITLE>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta http-equiv="imagetoolbar" content="no">
 <META name="keywords" content="gestion,stock">

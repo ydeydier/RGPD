@@ -11,10 +11,7 @@
 	$messageLoginIncorrect="";
 	if (isset($_GET['erreur'])) {
 		$erreur=$_GET['erreur'];
-		if ($erreur=="passwordIncorrectBase") $messageLoginIncorrect='<span class="erreur">Mot de passe local incorrect !</span>';
-		if ($erreur=="passwordIncorrectLDAP") $messageLoginIncorrect='<span class="erreur">Mot de passe Windows incorrect !</span>';
-		if ($erreur=="loginIncorrect")        $messageLoginIncorrect='<span class="erreur">Login incorrect !</span>';
-		if ($erreur=="aucunStockAutorise")    $messageLoginIncorrect='<span class="erreur">Vous n\'avez à aucun stock !<br>Veuillez contacter l\'administrateur de l\'application.</span>';
+		if ($erreur=="loginPasswordIncorrects") $messageLoginIncorrect='<span class="erreur">Login ou mot de passe incorrect !</span>';
 	}
 ?>
 <table class="tableLogin">
@@ -41,7 +38,7 @@
 
 <tr height="40%">
 <td style="color:#EEEEEE;" valign="bottom">
-RT-RGPD Version 1.0 - <a class="lienFondVert" href="apropos.php">A propos de RT-RGPD</a></div>
+RTR Version 0.8 - <a class="lienFondVert" href="apropos.php">A propos de RTR</a></div>
 </td>
 </tr>
 </table>

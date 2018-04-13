@@ -16,7 +16,7 @@
 
 <form method="POST" action="modifierTraitement_trt.php">
 
-<table class="tableCommune">
+<table width="40%" class="tableCommune">
 <?php
 	$libelleCategoriePrecedent="";
 	foreach ($champs as $champ) {
@@ -39,7 +39,7 @@
 			$texteApres="&nbsp;&nbsp;&nbsp;num. interne : $refInterne";
 			if (trim($donnee)=="") $donnee=$refInterne;
 		} else {
-			$long="35";
+			$long="40";
 			$texteApres="";
 		}
 		
@@ -49,7 +49,7 @@
 		}
 		// Champ de type "Multiligne"
 		if ($typeInterface=="M") {
-			$HTMLchamp="<textarea rows=\"2\" cols=\"35\" name=\"txt_$nomChamp\">$donnee</textarea>";
+			$HTMLchamp="<textarea rows=\"3\" cols=\"40\" name=\"txt_$nomChamp\">$donnee</textarea>";
 		}
 		// Champ de type "Liste"
 		if ($typeInterface=="L") {
@@ -73,8 +73,8 @@
 			$HTMLchamp="<input size=\"10\" type=\"text\" value=\"$donnee\" name=\"txt_$nomChamp\"> (JJ/MM/AAAA)";
 		}
 		echo "<tr>";
-		echo "<th nowrap align=\"left\">$libelle<br><span class=\"description\">$description</span></th>";
-		echo "<td>$HTMLchamp</td>";
+		echo "<th width=\"40%\" align=\"left\">$libelle<br><span class=\"description\">$description</span></th>";
+		echo "<td width=\"60%\">$HTMLchamp</td>";
 		echo "</tr>";
 	}
 ?>

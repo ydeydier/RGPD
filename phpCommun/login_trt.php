@@ -7,46 +7,58 @@
 	session_start();
 	require_once "../phpCommun/connexion.php";
 	
-	$login=$_POST["txtLogin"];
+	$loginSaisi=$_POST["txtLogin"];
 	$passwordSaisi=$_POST["txtPassword"];
 	$tConnexionLDAP = $tConfiguration["connexionLDAP"];
-	$utilisateur=utilisateur::charger($login);
-	$passwordRenseigne=(trim($utilisateur->password)!="");
-	if ($utilisateur!=FALSE) {
+	
+	// ***************************************************
+	// Principe de vérification du login-password
+	// ***************************************************
+	//     - recherche en base de donnée du login.
+	//			-> Si trouvé
+	//				-> si en base le mot de passe est renseigné, on le compare avec celui saisi. FIN DU TEST.
+	//				-> si non renseigné, on demande au ldap. FIN DU TEST.
+	//          -> Si non trouvé on demande au LDAP, et on récupère nom et prénom dans le LDAP. FIN DU TEST.
+	//
+	$utilisateur=utilisateur::chargerDepuisBDD($loginSaisi);
+	if ($utilisateur) {
+		$passwordRenseigne=($utilisateur->password!="");
 		if ($passwordRenseigne) {
 			// Si un mot de passe existe en base, vérifier si celui saisi est identique
-			$bPassword=$utilisateur->verifierLoginPasswordBase($passwordSaisi);
+			$bPasswordOK=$utilisateur->verifierLoginPasswordBase($passwordSaisi);
 		} else {
 			// Sinon demander au LDAP
-			$bPassword=$utilisateur->verifierLoginPasswordLDAP($passwordSaisi, $tConnexionLDAP);
-		}
-		if ($bPassword!=FALSE) {
-			if ($utilisateur->estAdministrateur()) {
-				$_SESSION["estAdministrateur"]="OUI";
-				$redirigeVers="../phpAdmin/pagePrincipaleAdmin.php";
-			} else {
-				$_SESSION["estAdministrateur"]="NON";
-				$redirigeVers="../phpUtilisateur/consulterTraitements.php";
-			}
-			$_SESSION["estConnecte"]="OUI";
-			$_SESSION["utilisateur"]=$utilisateur;
-			// Charge l'ensemble des champs et catégories, et les stocke en session (array d'instances de 'champ' et de 'categorie')
-			$champs=champ::charger();
-			$categories=categorie::charger();
-			$_SESSION["champs"]=$champs;
-			$_SESSION["categories"]=$categories;
-			setcookie('login', $login, time() + 5*365*24*3600, null, null, false, true);
-			setcookie('password', $passwordSaisi, time() + 5*365*24*3600, null, null, false, true);
-		} else {
-			if ($passwordRenseigne) {
-				$erreur="passwordIncorrectBase"; // TODO: tester tout cela !
-			} else {
-				$erreur="passwordIncorrectLDAP";
-			}
-			$redirigeVers="../phpCommun/login.php?erreur=".$erreur;
+			$bPasswordOK=$utilisateur->verifierLoginPasswordLDAP($passwordSaisi, $tConnexionLDAP);
 		}
 	} else {
-		$redirigeVers="../phpCommun/login.php?erreur=loginIncorrect";
+		$utilisateur=utilisateur::chargerDepuisLDAP($loginSaisi, $passwordSaisi, $tConnexionLDAP);
+		if ($utilisateur) {
+			$bPasswordOK=true;
+		} else {
+			$bPasswordOK=false;
+		}
 	}
+	if ($bPasswordOK) {
+		// Test : administrateur ou pas
+		if ($utilisateur->estAdministrateur()) {
+			$_SESSION["estAdministrateur"]="OUI";
+			$redirigeVers="../phpAdmin/pagePrincipaleAdmin.php";
+		} else {
+			$_SESSION["estAdministrateur"]="NON";
+			$redirigeVers="../phpUtilisateur/consulterTraitements.php";
+		}
+		// Variables de sessions
+		$_SESSION["estConnecte"]="OUI";
+		$_SESSION["utilisateur"]=$utilisateur;
+		// Charge l'ensemble des champs et catégories, et les stocke en session (array d'instances de 'champ' et de 'categorie')
+		$champs=champ::charger();
+		$categories=categorie::charger();
+		$_SESSION["champs"]=$champs;
+		$_SESSION["categories"]=$categories;
+	} else {
+		$redirigeVers="../phpCommun/login.php?erreur=loginPasswordIncorrects";
+	}
+	setcookie('login', $loginSaisi, time() + 5*365*24*3600, null, null, false, true);
+	setcookie('password', $passwordSaisi, time() + 5*365*24*3600, null, null, false, true);
 	header("Location: $redirigeVers");
 ?>

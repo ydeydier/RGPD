@@ -7,7 +7,7 @@ class intitule {
 	
 	static function charger() {
 		// echo "JE CHARGE !"; TOTO : pourquoi chargement à chaque fois ?!!!!
-		$result = executeSqlSelect("SELECT * FROM intitule");
+		$result = executeSqlSelect("SELECT * FROM intitule ORDER BY type, ordre, libelle");
 		$intitules = array();
 		while($row = mysqli_fetch_array($result)) {
 			$intitule = self::instanceDepuisSqlRow($row);

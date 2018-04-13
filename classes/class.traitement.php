@@ -5,8 +5,8 @@ class traitement {
 	var $corbeille;			// 'O' ou 'N'
 	var $donnees;			// array contenant l'ensemble des champs
 	
-	static function charger($champs) {
-		$result = executeSqlSelect("SELECT * FROM traitement");
+	static function charger($champs, $corbeille) {
+		$result = executeSqlSelect("SELECT * FROM traitement WHERE corbeille='$corbeille'");
 		$traitements = array();
 		while($row = mysqli_fetch_array($result)) {
 			$traitement = self::instanceDepuisSqlRow($row, $champs);
@@ -67,9 +67,14 @@ class traitement {
 		executeSql("insert into traitement (quimaj) values ('$login')");
 		$this->idTraitement=dernierIdAttribue();
 	}
-
-	function delete($idTraitement) {
-		executeSql("delete from traitement where idTraitement=$idTraitement");
+	function envoyerCorbeille() {
+		executeSql("update traitement set corbeille='O' where idTraitement=$this->idTraitement");
 	}
+	function restaurerDepuisCorbeille() {
+		executeSql("update traitement set corbeille='N' where idTraitement=$this->idTraitement");
+	}
+	//function delete($idTraitement) {
+	//	executeSql("delete from traitement where idTraitement=$idTraitement");
+	//}
 }
 ?>
