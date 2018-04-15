@@ -7,6 +7,7 @@
 		$typeInterface=$champ->typeInterface;
 		$donnee=$_POST["txt_$nomChamp"];
 		$donnees[$nomChamp]=$donnee;
+		// TODO : dans le cas d'un champ LISTE, ajouter aux intitulés si celui-ci n'existe pas
 	}
 	$traitement->update($champs, $utilisateur->login);
 	unset($_SESSION["traitement"]);

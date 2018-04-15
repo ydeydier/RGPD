@@ -9,6 +9,24 @@
 ?>
 <CENTER>
 
+<script type="text/javascript">
+function listeChanged(laListe) {
+	valeur=laListe.value;
+	nomChamp = laListe.getAttribute("data-nomChamp");
+	leSpan=document.getElementById("ID_" + nomChamp + "_SPAN_AJOUT");
+	leInput=leSpan.children[1];
+	if (valeur.substr(0, 2)=="~~") {
+		leSpan.style.display="inline";
+		laListe.name="";
+		leInput.name="txt_" + nomChamp;
+	} else {
+		leSpan.style.display="none";
+		laListe.name="txt_" + nomChamp;
+		leInput.name="";
+	}
+}
+</script>
+
 <br><br><br>
 <h1><?php echo $donnees['nom'];?></h1>
 <br><br><br>
@@ -54,7 +72,7 @@
 		// Champ de type "Liste"
 		if ($typeInterface=="L") {
 			$typeListe=$champ->typeListe;
-			$HTMLchamp ="<select name=\"txt_$nomChamp\">";
+			$HTMLchamp ="<select onchange=\"listeChanged(this)\" data-nomChamp=\"$nomChamp\" name=\"txt_$nomChamp\">";
 			$HTMLchamp.="<option value=\"\"> - </option>";
 			$intitules = intitule::getIntitules($typeListe);
 			foreach ($intitules as $intitule) {
@@ -67,6 +85,8 @@
 				$HTMLchamp.="<option $selected value=\"$libelleIntitule\">$libelleIntitule</option>";
 			}
 			$HTMLchamp.="</select>";
+			// Eventuel champ d'ajout
+			$HTMLchamp.="<span style=\"display:none;\" id=\"ID_$nomChamp"."_SPAN_AJOUT\" ><br>Ajouter : <input style=\"margin-top:5px;\" type=\"text\"></span>";
 		}
 		// Champ de type "Date"
 		if ($typeInterface=="D") {
