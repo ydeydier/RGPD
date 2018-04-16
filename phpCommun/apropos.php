@@ -27,6 +27,7 @@ Les codes sources sont disponibles sur GitHub : <a target="_blank" class="lienFo
 RESTE A FAIRE
 ------------------
 - Historique des modifications
+- Terminer : "ajouter un nouveau service" (n'est pas ajouté dans les intitulés)
 - Administration
 	- édition de la table 'intitulé'
 - Menu sur le côté

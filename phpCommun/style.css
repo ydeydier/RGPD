@@ -178,7 +178,28 @@ h1 {
 img  {
     border:0px;
 }
+
 .description {
 	FONT-SIZE: 9px;
 	font-weight:normal;
+}
+
+@-webkit-keyframes fadeIn {
+    from { opacity: 0; }
+      to { opacity: 1; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+      to { opacity: 1; }
+}
+
+.cache {
+	display:none;
+}
+
+.montre {
+	display:inline;
+	animation-name: fadeIn;
+	animation-duration: 1s;
 }

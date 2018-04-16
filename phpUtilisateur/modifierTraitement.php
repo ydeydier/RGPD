@@ -16,11 +16,11 @@ function listeChanged(laListe) {
 	leSpan=document.getElementById("ID_" + nomChamp + "_SPAN_AJOUT");
 	leInput=leSpan.children[1];
 	if (valeur.substr(0, 2)=="~~") {
-		leSpan.style.display="inline";
+		leSpan.setAttribute("class", "montre");
 		laListe.name="";
 		leInput.name="txt_" + nomChamp;
 	} else {
-		leSpan.style.display="none";
+		leSpan.setAttribute("class", "cache");
 		laListe.name="txt_" + nomChamp;
 		leInput.name="";
 	}
@@ -86,7 +86,7 @@ function listeChanged(laListe) {
 			}
 			$HTMLchamp.="</select>";
 			// Eventuel champ d'ajout
-			$HTMLchamp.="<span style=\"display:none;\" id=\"ID_$nomChamp"."_SPAN_AJOUT\" ><br>Ajouter : <input style=\"margin-top:5px;\" type=\"text\"></span>";
+			$HTMLchamp.="<span class=\"cache\" id=\"ID_$nomChamp"."_SPAN_AJOUT\" ><br>Ajouter : <input style=\"margin-top:5px;\" type=\"text\"></span>";
 		}
 		// Champ de type "Date"
 		if ($typeInterface=="D") {
