@@ -34,7 +34,7 @@ function listeChanged(laListe) {
 
 <form method="POST" action="modifierTraitement_trt.php">
 
-<table width="40%" class="tableCommune">
+<table width="50%" class="tableCommune">
 <?php
 	$libelleCategoriePrecedent="";
 	foreach ($champs as $champ) {
@@ -42,9 +42,11 @@ function listeChanged(laListe) {
 		$donnee=$donnees[$nomChamp];
 		$libelle=$champ->libelleChamp;
 		$description=$champ->description;
+		$description=str_replace("\n", "<br>", $description);
 		$idCategorie=$champ->idCategorie;
 		$libelleCategorie=$categories[$idCategorie]->libelle;
 		if ($libelleCategoriePrecedent<>$libelleCategorie) {
+			echo "<tr height=\"20px\"><th class=\"thBlanc\" colspan=\"2\">&nbsp;</tr>";
 			echo "<tr height=\"30px\"><th class=\"categorie\" colspan=\"2\">$libelleCategorie</tr>";
 			$libelleCategoriePrecedent=$libelleCategorie;
 		}

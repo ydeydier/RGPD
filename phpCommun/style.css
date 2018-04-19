@@ -86,7 +86,13 @@ a:hover {
 }
 
 .tableCommune .categorie {
-	BACKGROUND:#f4e4d0;
+	BACKGROUND:#56abac;
+	color:#ffffff;
+	FONT-SIZE: 11px;
+}
+
+.tableCommune .thBlanc {
+	BACKGROUND:#ffffff;
 }
 
 .tableCommune tr {
@@ -180,8 +186,9 @@ img  {
 }
 
 .description {
-	FONT-SIZE: 9px;
+	FONT-SIZE: 9.1px;
 	font-weight:normal;
+	Line-Height: 1;
 }
 
 @-webkit-keyframes fadeIn {
@@ -202,4 +209,18 @@ img  {
 	display:inline;
 	animation-name: fadeIn;
 	animation-duration: 1s;
+}
+
+.lettreInterrogation {
+	font-size:50px;
+	color:#EE0000;
+	font-weight:bold;
+	text-shadow: 5px 5px 10px #FF9999;
+}
+
+.lettreInformation {
+	font-size:50px;
+	color:#0000EE;
+	font-weight:bold;
+	text-shadow: 5px 5px 10px #9999FF;
 }

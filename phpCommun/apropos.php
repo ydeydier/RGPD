@@ -33,6 +33,7 @@ RESTE A FAIRE
 - Menu sur le côté
 - Description des différents champs pour l'utilisateur
 - séparer direction et service ?
+- Augmenter la durée de la session
 </ul>
 </pre>
 </span>
