@@ -2,6 +2,7 @@
 class traitement {
 	var $idTraitement;
 	var $timestamp;
+	var $quimaj;
 	var $corbeille;			// 'O' ou 'N'
 	var $donnees;			// array contenant l'ensemble des champs
 	
@@ -26,6 +27,7 @@ class traitement {
 		$traitement = new traitement();
 		$traitement->idTraitement=$row['idTraitement'];
 		$traitement->timestamp=$row['timestamp'];
+		$traitement->quimaj=$row['quimaj'];
 		$traitement->corbeille=$row['corbeille'];
 		$traitement->donnees=array();
 		foreach ($champs as $champ) {
@@ -37,10 +39,12 @@ class traitement {
 		return $traitement;
 	}
 
-	function update($champs, $login) {
+	function update($champs, $login, $intitules) {
 		$nomChamps=array_keys($champs);
 		$dernierChamp = end($nomChamps);
 		$sql="";
+		// La requête d'update est découpée en plusieurs requêtes, de taille maximale 4300 caractère
+		// afin d'éviter une erreur SQL en cas de requête trop grande.
 		foreach ($champs as $champ) {
 			if ($sql=="") {
 				$sql="update traitement set quimaj='$login', timestamp=now()";
@@ -61,6 +65,18 @@ class traitement {
 				$sql="";
 			}
 		}
+		// Si une donnée n'existe pas dans la table des intitulées, celle-ci y est ajoutée
+		foreach ($champs as $champ) {
+			$typeInterface=$champ->typeInterface;
+			if ($typeInterface=="L") {
+				$typeListe=$champ->typeListe;
+				$nomChamp=$champ->nomChamp;
+				$libelle=trim($donnees[$nomChamp]);
+				if ($libelle!="" && !intitule::existe($typeListe, $libelle, $intitules)) {
+					intitule::ajoute($typeListe, $libelle);
+				}
+			}
+		}
 	}
 
 	function insert($login) {
@@ -72,6 +88,12 @@ class traitement {
 	}
 	function restaurerDepuisCorbeille() {
 		executeSql("update traitement set corbeille='N' where idTraitement=$this->idTraitement");
+	}
+	function timestampFr() {
+		$ts=$this->timestamp;
+		$ts = strtotime($ts);
+		$ts=date("d/m/Y H:i:s", $ts);
+		return $ts;
 	}
 	//function delete($idTraitement) {
 	//	executeSql("delete from traitement where idTraitement=$idTraitement");

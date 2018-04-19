@@ -9,7 +9,7 @@ body {
 }
 
 * {
-	FONT-SIZE: 11px; FONT-FAMILY: Verdana, 'Lucida Grande', Arial, sans-serif; color: #000000;
+	FONT-SIZE: 12px; FONT-FAMILY: Verdana, 'Lucida Grande', Arial, sans-serif; color: #000000;
 }
 
 input {
@@ -79,7 +79,7 @@ a:hover {
 
 .tableCommune tr th {
 	padding:4px;
-	FONT-SIZE: 10px;
+	FONT-SIZE: 12px;
 	padding-left:10px;
 	padding-right:10px;
 	BACKGROUND:#f4d4ad;
@@ -88,7 +88,7 @@ a:hover {
 .tableCommune .categorie {
 	BACKGROUND:#56abac;
 	color:#ffffff;
-	FONT-SIZE: 11px;
+	FONT-SIZE: 12px;
 }
 
 .tableCommune .thBlanc {
@@ -109,6 +109,15 @@ a:hover {
 	padding-left:10px;
 	padding-right:10px;
 }
+
+.tableCommune .modif {
+	BACKGROUND:#ffffff;
+	color:#000000;
+	FONT-SIZE: 11px;
+	text-align:right;
+	font-weight:normal;
+}
+
 
 button {
 	padding:6px 0 6px 0;
@@ -147,21 +156,6 @@ button {
 	background:#FF0000;
 }
 
-.menu {
-	color:#FFFFFF;
-	display:block;
-	width:300px;
-	height:30px;
-	font-weight:bold;
-	BACKGROUND:#56abac;
-	text-align: center;
-	line-height: 30px;
-}
-
-.menu:hover {
-	BACKGROUND:#f4d4ad;
-}
-
 .attention {
 	color:#EE0000;
 }
@@ -186,7 +180,7 @@ img  {
 }
 
 .description {
-	FONT-SIZE: 9.1px;
+	FONT-SIZE: 11px;
 	font-weight:normal;
 	Line-Height: 1;
 }
@@ -223,4 +217,29 @@ img  {
 	color:#0000EE;
 	font-weight:bold;
 	text-shadow: 5px 5px 10px #9999FF;
+}
+
+.titrePage {
+	font-size:14px;
+}
+
+.menu {
+	color:#FFFFFF;
+	display:block;
+	width:150px;
+	height:30px;
+	font-weight:bold;
+	BACKGROUND:#56abac;
+	text-align: center;
+	line-height: 30px;
+}
+
+.menu:hover {
+	BACKGROUND:#f4d4ad;
+}
+
+.divMenuGauche {
+	position:fixed;
+	left:10px;
+	top:300px;
 }

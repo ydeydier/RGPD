@@ -12,8 +12,13 @@ function restaurerDepuisCorbeille(idTraitement) {
 	}
 }
 </script>
-<CENTER>
+<!-- Menu gauche -->
+<div class="divMenuGauche">
+<a class="menu" href="consulterTraitements.php">Retourner à la liste des traitements</a>
+</div>
 
+<!-- Corps de la page -->
+<CENTER>
 <br><br><br>
 <h1>Liste des traitements en corbeille</h1>
 <br><br><br>
@@ -44,11 +49,8 @@ function restaurerDepuisCorbeille(idTraitement) {
 	}
 ?>
 </table>
-<br><br>
-<a class="menu" href="consulterTraitements.php">Retourner à la liste des traitements</a><br>
-
 </CENTER>
-<br><br><br><br>
+<br><br><br><br><br><br>
 <?php
 	require "footer.php";
 ?>

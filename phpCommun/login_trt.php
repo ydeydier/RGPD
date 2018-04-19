@@ -4,6 +4,7 @@
 	require_once "../classes/class.categorie.php";
 	require_once "../classes/class.champ.php";
 	require_once "../classes/class.utilisateur.php";
+	require_once "../classes/class.intitule.php";
 	session_start();
 	require_once "../phpCommun/connexion.php";
 	
@@ -50,11 +51,14 @@
 		// Variables de sessions
 		$_SESSION["estConnecte"]="OUI";
 		$_SESSION["utilisateur"]=$utilisateur;
+		$utilisateur->logConnexion();
 		// Charge l'ensemble des champs et catégories, et les stocke en session (array d'instances de 'champ' et de 'categorie')
 		$champs=champ::charger();
 		$categories=categorie::charger();
+		$intitules=intitule::charger();
 		$_SESSION["champs"]=$champs;
 		$_SESSION["categories"]=$categories;
+		$_SESSION["intitules"]=$intitules;
 	} else {
 		$redirigeVers="../phpCommun/login.php?erreur=loginPasswordIncorrects";
 	}

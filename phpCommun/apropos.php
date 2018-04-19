@@ -26,14 +26,19 @@ Les codes sources sont disponibles sur GitHub : <a target="_blank" class="lienFo
 ------------------
 RESTE A FAIRE
 ------------------
+- Menu sur le côté
 - Historique des modifications
-- Terminer : "ajouter un nouveau service" (n'est pas ajouté dans les intitulés)
 - Administration
 	- édition de la table 'intitulé'
-- Menu sur le côté
 - Description des différents champs pour l'utilisateur
-- séparer direction et service ?
+- Séparer direction et service ?
 - Augmenter la durée de la session
+
+- 1. Identifier un responsable des droits. Qui ?
+- 2. Ré-étude des droits : périodicité ? (pertinente avec l’ajout des informations et les mouvements de personnel)
+- 3. Etude d’impact (fiche CNIL)
+- 4. Collecte des informations
+- 5. Catégories de données personnelles concernées
 </ul>
 </pre>
 </span>

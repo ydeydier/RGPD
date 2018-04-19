@@ -6,7 +6,13 @@
 	$donnees=$traitement->donnees;
 ?>
 <CENTER>
+<!-- Menu gauche -->
+<div class="divMenuGauche">
+<a class="menu" href="modifierTraitement.php?id=<?php echo $traitement->idTraitement;?>&actionAnnuler=consulterUnitaire">Modifier</a><br>
+<a class="menu" href="consulterTraitements.php">Retour à la liste des traitements</a><br>
+</div>
 
+<!-- Corps de la page -->
 <br><br><br>
 <h1>Traitement : <?php echo $donnees['nom'];?></h1>
 <br><br><br>
@@ -23,8 +29,8 @@
 		$idCategorie=$champ->idCategorie;
 		$libelleCategorie=$categories[$idCategorie]->libelle;
 		if ($libelleCategoriePrecedent<>$libelleCategorie) {
-			echo "<tr height=\"20px\"><th class=\"thBlanc\" colspan=\"2\">&nbsp;</tr>";
-			echo "<tr height=\"30px\"><th class=\"categorie\" colspan=\"2\">$libelleCategorie</tr>";
+			echo "<tr height=\"20px\"><th class=\"thBlanc\" colspan=\"2\">&nbsp;</th></tr>";
+			echo "<tr height=\"30px\"><th class=\"categorie\" colspan=\"2\">$libelleCategorie</th></tr>";
 			$libelleCategoriePrecedent=$libelleCategorie;
 		}
 		echo "<tr>";
@@ -33,13 +39,10 @@
 		echo "</tr>";
 	}
 ?>
+<tr><td class="modif" colspan="2">Dernière modification par <?php echo $traitement->quimaj?>, le <?php echo $traitement->timestampFr()?></td></tr>
 </table>
-
-<br><br>
-<a class="menu" href="modifierTraitement.php?id=<?php echo $traitement->idTraitement;?>&actionAnnuler=consulterUnitaire">Modifier</a><br>
-<a class="menu" href="consulterTraitements.php">Retour à la liste des traitements</a><br>
 </CENTER>
-<br><br><br><br>
+<br><br><br><br><br><br><br><br>
 <?php
 	require "footer.php";
 ?>

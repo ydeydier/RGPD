@@ -6,6 +6,18 @@
 	$traitement = traitement::chargerAvecId($idTraitement, $champs);	// la base est lue à nouveau de manière à s'assurer de visualiser la dernière version
 	$donnees=$traitement->donnees;
 	$_SESSION["traitement"]=$traitement;		// variable de session utilisée uniquement sur cette page et modifierTraitement_trt.php
+	// Lien en cas d'annulation
+	switch ($actionAnnuler) {
+		case "delete":
+			$locationAnnuler="supprimerTraitement_trt.php?id=$idTraitement";
+			break;
+		case "consulterUnitaire":
+			$locationAnnuler="consulterTraitement.php?id=$idTraitement";
+			break;
+		case "consulterListe":
+			$locationAnnuler="consulterTraitements.php";
+			break;
+	}
 ?>
 <CENTER>
 
@@ -34,6 +46,14 @@ function listeChanged(laListe) {
 
 <form method="POST" action="modifierTraitement_trt.php">
 
+<!-- Menu gauche -->
+<div class="divMenuGauche">
+<button type="submit" class="boutonValider">Valider</button>
+&nbsp;&nbsp;&nbsp;
+<button type="button" class="boutonAnnuler" onclick="javascript:window.location='<?php echo $locationAnnuler;?>'">Annuler</button>
+</div>
+
+<!-- Corps de la page -->
 <table width="50%" class="tableCommune">
 <?php
 	$libelleCategoriePrecedent="";
@@ -46,8 +66,8 @@ function listeChanged(laListe) {
 		$idCategorie=$champ->idCategorie;
 		$libelleCategorie=$categories[$idCategorie]->libelle;
 		if ($libelleCategoriePrecedent<>$libelleCategorie) {
-			echo "<tr height=\"20px\"><th class=\"thBlanc\" colspan=\"2\">&nbsp;</tr>";
-			echo "<tr height=\"30px\"><th class=\"categorie\" colspan=\"2\">$libelleCategorie</tr>";
+			echo "<tr height=\"20px\"><th class=\"thBlanc\" colspan=\"2\">&nbsp;</th></tr>";
+			echo "<tr height=\"30px\"><th class=\"categorie\" colspan=\"2\">$libelleCategorie</th></tr>";
 			$libelleCategoriePrecedent=$libelleCategorie;
 		}
 		// TODO: utiliser le champ tailleMax
@@ -76,8 +96,8 @@ function listeChanged(laListe) {
 			$typeListe=$champ->typeListe;
 			$HTMLchamp ="<select onchange=\"listeChanged(this)\" data-nomChamp=\"$nomChamp\" name=\"txt_$nomChamp\">";
 			$HTMLchamp.="<option value=\"\"> - </option>";
-			$intitules = intitule::getIntitules($typeListe);
-			foreach ($intitules as $intitule) {
+			$intitulesChamp = intitule::getIntitules($typeListe, $intitules);
+			foreach ($intitulesChamp as $intitule) {
 				$libelleIntitule=$intitule->libelle;
 				if ($donnee==$libelleIntitule) {
 					$selected="SELECTED";
@@ -101,28 +121,10 @@ function listeChanged(laListe) {
 	}
 ?>
 </table>
-<br><br>
-
-<?php
-	switch ($actionAnnuler) {
-		case "delete":
-			$locationAnnuler="supprimerTraitement_trt.php?id=$idTraitement";
-			break;
-		case "consulterUnitaire":
-			$locationAnnuler="consulterTraitement.php?id=$idTraitement";
-			break;
-		case "consulterListe":
-			$locationAnnuler="consulterTraitements.php";
-			break;
-	}
-?>
-<button type="submit" class="boutonValider">Valider</button>
-&nbsp;&nbsp;&nbsp;
-<button type="button" class="boutonAnnuler" onclick="javascript:window.location='<?php echo $locationAnnuler;?>'">Annuler</button>
 </form>
 
 </CENTER>
-<br><br><br><br>
+<br><br><br><br><br><br>
 <?php
 	require "footer.php";
 ?>

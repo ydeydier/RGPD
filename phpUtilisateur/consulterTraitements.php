@@ -38,6 +38,13 @@ function envoyerCorbeille(idTraitement) {
 	}
 }
 </script>
+<!-- Menu gauche -->
+<div class="divMenuGauche">
+<a class="menu" href="ajouterTraitement_trt.php">Ajouter un traitement</a><br>
+<a class="menu" href="consulterTraitementsCorbeille.php">Voir la corbeille</a>
+</div>
+
+<!-- Corps de la page -->
 <CENTER>
 
 <br><br><br>
@@ -51,7 +58,7 @@ function envoyerCorbeille(idTraitement) {
 		<select onchange="javascript:window.location='consulterTraitements_trt.php?service=' + this.value;">
 		<option <?php echo ($serviceFiltre=="Tous"?" selected":""); ?> value="Tous">Tous</option>
 			<?php
-			$intituleServices = intitule::getIntitules("SERVICE");
+			$intituleServices = intitule::getIntitules("SERVICE", $intitules);
 			foreach ($intituleServices as $intitule) {
 				$libelleIntitule=$intitule->libelle;
 				if ($serviceFiltre==$libelleIntitule) {
@@ -120,12 +127,8 @@ function envoyerCorbeille(idTraitement) {
 	}
 ?>
 </table>
-<br><br>
-<a class="menu" href="ajouterTraitement_trt.php">Ajouter un traitement</a><br>
-<a class="menu" href="consulterTraitementsCorbeille.php">Voir la corbeille</a><br>
-
 </CENTER>
-<br><br><br><br>
+<br><br><br><br><br><br>
 <?php
 	require "footer.php";
 ?>

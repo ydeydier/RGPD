@@ -19,4 +19,4 @@
 </td>
 </tr>
 <tr>
-<td width="100%" valign="top">
+<td width="100%" height="100%" valign="top">

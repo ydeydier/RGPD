@@ -3,10 +3,8 @@ class intitule {
 	var $idIntitule;
 	var $type;
 	var $libelle;
-	private static $intitules;	// tableau des intitules
 	
 	static function charger() {
-		// echo "JE CHARGE !"; TOTO : pourquoi chargement à chaque fois ?!!!!
 		$result = executeSqlSelect("SELECT * FROM intitule ORDER BY type, ordre, libelle");
 		$intitules = array();
 		while($row = mysqli_fetch_array($result)) {
@@ -24,17 +22,31 @@ class intitule {
 		return $intitule;
 	}
 	
-	static function getIntitules($type) {
-		if (!isset(self::$intitules)) {
-			self::$intitules=self::charger();
-		}
+	static function getIntitules($type, $intitules) {
 		$ret=array();
-		foreach (self::$intitules as $intitule) {
+		foreach ($intitules as $intitule) {
 			if ($intitule->type==$type) {
 				$ret[]=$intitule;
 			}
 		}
 		return $ret;
 	}
+
+	static function existe($type, $libelle, $intitules) {
+		$bExiste=false;
+		foreach ($intitules as $intitule) {
+			if ($intitule->type==$type) {
+				if ($intitule->libelle==$libelle) {
+					$bExiste=true;
+					break;
+				}
+			}
+		}
+		return $bExiste;
+	}
+	
+	static function ajoute($type, $libelle) {
+		executeSql("insert into intitule(ordre, type, libelle) values (0, '$type', '$libelle')");
+	}	
 }
 ?>

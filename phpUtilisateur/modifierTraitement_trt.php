@@ -7,9 +7,13 @@
 		$typeInterface=$champ->typeInterface;
 		$donnee=$_POST["txt_$nomChamp"];
 		$donnees[$nomChamp]=$donnee;
-		// TODO : dans le cas d'un champ LISTE, ajouter aux intitulés si celui-ci n'existe pas
 	}
-	$traitement->update($champs, $utilisateur->login);
+	$traitement->update($champs, $utilisateur->login, $intitules);
+	// Un intitulé peut avoir été ajouté, il convient donc de les recharger
+	$intitules=intitule::charger();
+	$_SESSION["intitules"]=$intitules;
+	// La variable de session 'traitement' n'est plus utile, elle est supprimée
 	unset($_SESSION["traitement"]);
+	// Redirection
 	header("Location: consulterTraitement.php?id=$traitement->idTraitement");
 ?>

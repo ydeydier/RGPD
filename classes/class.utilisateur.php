@@ -66,6 +66,7 @@ class utilisateur {
 		return ($this->administrateur=="O");
 	}
 
+	/*
 	function update() {
 		$sql="update utilisateur set nom='".mysqlEscape($this->nom)."', prenom='".mysqlEscape($this->prenom)."', password='".mysqlEscape($this->password)."' where idUtilisateur=$this->idUtilisateur";
 		executeSql($sql);
@@ -79,6 +80,19 @@ class utilisateur {
 	static function delete($idUtilisateur) {
 		$sql="delete from utilisateur where idUtilisateur=$idUtilisateur";
 		executeSql($sql);
+	}
+	*/
+	function logConnexion() {
+		$sql="insert into connexion (login) value ('".mysqlEscape($this->login)."')";
+		executeSql($sql);
+	}
+	function chargeConnexions() {
+		$connexions = array();
+		$result = executeSqlSelect("SELECT * FROM connexion order by timestamp desc");
+		while($row = mysqli_fetch_array($result)) {
+			$connexions[]=array("login"=>$row["login"], "timestamp"=>$row["timestamp"]);
+		}
+		return $connexions;
 	}
 }
 ?>

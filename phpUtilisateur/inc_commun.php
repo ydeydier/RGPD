@@ -16,4 +16,5 @@
 	$utilisateur=$_SESSION["utilisateur"];
 	$champs=$_SESSION["champs"];
 	$categories=$_SESSION["categories"];
+	$intitules=$_SESSION["intitules"];
 ?>

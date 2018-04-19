@@ -7,7 +7,7 @@
 	<table class="tableBandeauHaut">
 	<tr>
 		<td><img src="../img/rt-rgpd.png"></td>
-		<td width="100%" align="center">Registre des traitements RGPD</td>
+		<td class="titrePage" width="100%" align="center">Registre des traitements RGPD</td>
 		<td nowrap align="right" style="padding:5px;">
 			<?php echo "$utilisateur->prenom $utilisateur->nom";?><br>
 			<a class="lienFondVert" href="../phpCommun/logout_trt.php">Se déconnecter</a>
