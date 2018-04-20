@@ -16,8 +16,8 @@
 	$_SESSION["champModif"]=$champ;
 	echo "<tr><th>Nom</th><td>$champ->nomChamp</td></tr>";
 	echo "<tr><th>Ordre</th><td><input size=\"4\"  maxlength=\"4\" name=\"txtOrdre\" type=\"text\" value=\"$champ->ordre\"></td></tr>";
-	echo "<tr><th>Libelle</th><td><input name=\"txtLibelle\" size=\"40\" type=\"text\" value=\"$champ->libelleChamp\"></td></tr>";
-	echo "<tr><th>Description</th><td><textarea rows=\"4\" cols=\"40\" name=\"txtDescription\">$champ->description</textarea></td></tr>";
+	echo "<tr><th>Libelle</th><td><input name=\"txtLibelle\" size=\"40\" type=\"text\" value=\"".htmlspecialchars($champ->libelleChamp)."\"></td></tr>";
+	echo "<tr><th>Description</th><td><textarea rows=\"4\" cols=\"40\" name=\"txtDescription\">".htmlspecialchars($champ->description)."</textarea></td></tr>";
 	echo "<tr><th>Type Interface<br>(U=une ligne, M=multilignes,<br>D=Date, L=Liste)</th><td><input name=\"txtTypeInterface\" size=\"1\"  maxlength=\"1\" type=\"text\" value=\"$champ->typeInterface\"></td></tr>";
 	echo "<tr><th>Type Liste (intitulé)</th><td><input size=\"10\" maxlength=\"10\" name=\"txtTypeListe\" type=\"text\" value=\"$champ->typeListe\"></td></tr>";
 	echo "<tr><th>Taille Max</th><td><input size=\"3\" maxlength=\"3\" name=\"txtTailleMax\" type=\"text\" value=\"$champ->tailleMax\"></td></tr>";
