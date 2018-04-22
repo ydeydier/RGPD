@@ -33,6 +33,7 @@ RESTE A FAIRE
 - Description des différents champs pour l'utilisateur
 - Séparer direction et service ?
 - Augmenter la durée de la session
+- Expliquer "EC", "NA"...
 
 - 1. Identifier un responsable des droits. Qui ?
 - 2. Ré-étude des droits : périodicité ? (pertinente avec l’ajout des informations et les mouvements de personnel)

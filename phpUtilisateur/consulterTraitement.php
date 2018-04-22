@@ -35,9 +35,11 @@ Liste des<br>traitements
 		$description=str_replace("\n", "<br>", $description);
 		$idCategorie=$champ->idCategorie;
 		$libelleCategorie=$categories[$idCategorie]->libelle;
+		$descriptionCategorie=$categories[$idCategorie]->description;
+		if ($descriptionCategorie!="") $descriptionCategorie="<br><span class=\"descriptionCategorie\">$descriptionCategorie</span>";
 		if ($libelleCategoriePrecedent<>$libelleCategorie) {
 			echo "<tr height=\"20px\"><th class=\"thBlanc\" colspan=\"2\">&nbsp;</th></tr>";
-			echo "<tr height=\"30px\"><th class=\"categorie\" colspan=\"2\">$libelleCategorie</th></tr>";
+			echo "<tr height=\"30px\"><th class=\"categorie\" colspan=\"2\">$libelleCategorie$descriptionCategorie</th></tr>";
 			$libelleCategoriePrecedent=$libelleCategorie;
 		}
 		echo "<tr>";

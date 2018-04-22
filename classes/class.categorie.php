@@ -2,6 +2,7 @@
 class categorie {
 	var $idCategorie;
 	var $libelle;
+	var $description;
 	
 	static function charger() {
 		$result = executeSqlSelect("SELECT * FROM categorie");
@@ -17,6 +18,7 @@ class categorie {
 		$categorie = new categorie();
 		$categorie->idCategorie=$row['idCategorie'];
 		$categorie->libelle=$row['libelle'];
+		$categorie->description=$row['description'];
 		return $categorie;
 	}
 }

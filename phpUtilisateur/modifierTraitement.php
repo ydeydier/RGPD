@@ -65,9 +65,11 @@ function listeChanged(laListe) {
 		$description=str_replace("\n", "<br>", $description);
 		$idCategorie=$champ->idCategorie;
 		$libelleCategorie=$categories[$idCategorie]->libelle;
+		$descriptionCategorie=$categories[$idCategorie]->description;
+		if ($descriptionCategorie!="") $descriptionCategorie="<br><span class=\"descriptionCategorie\">$descriptionCategorie</span>";
 		if ($libelleCategoriePrecedent<>$libelleCategorie) {
 			echo "<tr height=\"20px\"><th class=\"thBlanc\" colspan=\"2\">&nbsp;</th></tr>";
-			echo "<tr height=\"30px\"><th class=\"categorie\" colspan=\"2\">$libelleCategorie</th></tr>";
+			echo "<tr height=\"30px\"><th class=\"categorie\" colspan=\"2\">$libelleCategorie$descriptionCategorie</th></tr>";
 			$libelleCategoriePrecedent=$libelleCategorie;
 		}
 		// TODO: utiliser le champ tailleMax
@@ -85,10 +87,12 @@ function listeChanged(laListe) {
 		
 		// Champ de type "Ligne (une unique ligne de texte)"
 		if ($typeInterface=="U") {
+			$donnee=htmlspecialchars($donnee);
 			$HTMLchamp="<input size=\"$long\" type=\"text\" value=\"$donnee\" name=\"txt_$nomChamp\">$texteApres";
 		}
 		// Champ de type "Multiligne"
 		if ($typeInterface=="M") {
+			$donnee=htmlspecialchars($donnee);
 			$HTMLchamp="<textarea rows=\"3\" cols=\"40\" name=\"txt_$nomChamp\">$donnee</textarea>";
 		}
 		// Champ de type "Liste"

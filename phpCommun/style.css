@@ -91,6 +91,13 @@ a:hover {
 	FONT-SIZE: 12px;
 }
 
+.tableCommune .descriptionCategorie {
+	FONT-SIZE: 11px;
+	font-weight:normal;
+	color:#ffffff;
+}
+
+
 .tableCommune .thBlanc {
 	BACKGROUND:#ffffff;
 }
