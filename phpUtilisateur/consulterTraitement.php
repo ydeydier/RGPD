@@ -8,8 +8,15 @@
 <CENTER>
 <!-- Menu gauche -->
 <div class="divMenuGauche">
-<a class="menu" href="modifierTraitement.php?id=<?php echo $traitement->idTraitement;?>&actionAnnuler=consulterUnitaire">Modifier</a><br>
-<a class="menu" href="consulterTraitements.php">Retour à la liste des traitements</a><br>
+<a class="menu" href="modifierTraitement.php?id=<?php echo $traitement->idTraitement;?>&actionAnnuler=consulterUnitaire">
+<img style="margin-top:12px;" width="35px" src="../img/editOriginale.png"><br>
+Modifier
+</a><br>
+<a class="menu" href="consulterTraitements.php">
+<img style="margin-top:12px;" width="30px" src="../img/menu.png"><br>
+Liste des<br>traitements
+</a>
+<br>
 </div>
 
 <!-- Corps de la page -->

@@ -95,8 +95,8 @@ class traitement {
 		$ts=date("d/m/Y H:i:s", $ts);
 		return $ts;
 	}
-	//function delete($idTraitement) {
-	//	executeSql("delete from traitement where idTraitement=$idTraitement");
-	//}
+	function delete($idTraitement) {
+		executeSql("delete from traitement where idTraitement=$idTraitement");
+	}
 }
 ?>

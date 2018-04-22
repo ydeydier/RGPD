@@ -14,7 +14,10 @@ function restaurerDepuisCorbeille(idTraitement) {
 </script>
 <!-- Menu gauche -->
 <div class="divMenuGauche">
-<a class="menu" href="consulterTraitements.php">Retourner à la liste des traitements</a>
+<a class="menu" href="consulterTraitements.php">
+<img style="margin-top:12px;" width="30px" src="../img/menu.png"><br>
+Liste des<br>traitements
+</a>
 </div>
 
 <!-- Corps de la page -->

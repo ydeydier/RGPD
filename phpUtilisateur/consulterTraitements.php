@@ -40,8 +40,18 @@ function envoyerCorbeille(idTraitement) {
 </script>
 <!-- Menu gauche -->
 <div class="divMenuGauche">
-<a class="menu" href="ajouterTraitement_trt.php">Ajouter un traitement</a><br>
-<a class="menu" href="consulterTraitementsCorbeille.php">Voir la corbeille</a>
+
+
+
+<a class="menu" href="ajouterTraitement_trt.php">
+<div class="lettreMenu" width="1%">+</div>
+Ajouter<br>Traitement
+</a>
+<br>
+<a class="menu" href="consulterTraitementsCorbeille.php">
+<img style="margin-top:5px;" width="35px" src="../img/corbeille.png"><br>
+Voir la<br>corbeille
+</a>
 </div>
 
 <!-- Corps de la page -->

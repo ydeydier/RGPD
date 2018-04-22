@@ -205,20 +205,6 @@ img  {
 	animation-duration: 1s;
 }
 
-.lettreInterrogation {
-	font-size:50px;
-	color:#EE0000;
-	font-weight:bold;
-	text-shadow: 5px 5px 10px #FF9999;
-}
-
-.lettreInformation {
-	font-size:50px;
-	color:#0000EE;
-	font-weight:bold;
-	text-shadow: 5px 5px 10px #9999FF;
-}
-
 .titrePage {
 	font-size:14px;
 }
@@ -226,16 +212,24 @@ img  {
 .menu {
 	color:#FFFFFF;
 	display:block;
-	width:150px;
-	height:30px;
+	width:80px;
+	height:80px;
 	font-weight:bold;
+	font-size:11px;
 	BACKGROUND:#56abac;
 	text-align: center;
-	line-height: 30px;
 }
 
 .menu:hover {
 	BACKGROUND:#f4d4ad;
+}
+
+.lettreMenu {
+	margin-top:5px;
+	font-size:40px;
+	color:#EE0000;
+	font-weight:bold;
+	text-shadow: 5px 5px 10px #555;
 }
 
 .divMenuGauche {
