@@ -44,16 +44,21 @@ function listeChanged(laListe) {
 <br><br><br>
 
 
-<form method="POST" action="modifierTraitement_trt.php">
-
 <!-- Menu gauche -->
 <div class="divMenuGauche">
-<button type="submit" class="boutonValider">Valider</button>
-&nbsp;&nbsp;&nbsp;
-<button type="button" class="boutonAnnuler" onclick="javascript:window.location='<?php echo $locationAnnuler;?>'">Annuler</button>
+<a class="menu" style="cursor:pointer;" onclick="javascript:document.formModfif.submit();">
+<img style="margin-top:10px;margin-bottom:4px;" src="../img/validation_p.png"><br>
+Valider
+</a>
+<br>
+<a class="menu" style="cursor:pointer;" onclick="javascript:window.location='<?php echo $locationAnnuler;?>'">
+<img style="margin-top:10px;margin-bottom:4px;" src="../img/annulation_p.png"><br>
+Annuler
+</a>
 </div>
 
 <!-- Corps de la page -->
+<form name="formModfif" method="POST" action="modifierTraitement_trt.php">
 <table width="50%" class="tableCommune">
 <?php
 	$libelleCategoriePrecedent="";
@@ -72,7 +77,7 @@ function listeChanged(laListe) {
 			echo "<tr height=\"30px\"><th class=\"categorie\" colspan=\"2\">$libelleCategorie$descriptionCategorie</th></tr>";
 			$libelleCategoriePrecedent=$libelleCategorie;
 		}
-		// TODO: utiliser le champ tailleMax
+		// TODO: utiliser éventuellement le champ tailleMax
 		$typeInterface=$champ->typeInterface;
 		
 		if ($nomChamp=="reference") {
@@ -125,6 +130,8 @@ function listeChanged(laListe) {
 	}
 ?>
 </table>
+<!-- Input suivant : pour permettre de valider le formulaire avec la touche ENTER, sous IE -->
+<input type="submit" style="opacity:0;">
 </form>
 
 </CENTER>

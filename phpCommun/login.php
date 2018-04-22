@@ -38,7 +38,7 @@
 
 <tr height="40%">
 <td style="color:#EEEEEE;" valign="bottom">
-RTR Version 0.8 - <a class="lienFondVert" href="apropos.php">A propos de RTR</a></div>
+RTR Version 1.0 - <a class="lienFondVert" href="apropos.php">A propos de RTR</a></div>
 </td>
 </tr>
 </table>

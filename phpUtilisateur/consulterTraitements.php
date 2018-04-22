@@ -1,7 +1,6 @@
 <?php
 	require "inc_commun.php";
 	require "header_et_menu.php";
-	$champs=champ::charger(); // TODO : à supprimer ! Inutile de recharger cela à chaque fois
 	// Gestion du filtre "service"
 	$serviceFiltre="Tous";
 	if (isset($_SESSION['service'])) {
@@ -40,9 +39,6 @@ function envoyerCorbeille(idTraitement) {
 </script>
 <!-- Menu gauche -->
 <div class="divMenuGauche">
-
-
-
 <a class="menu" href="ajouterTraitement_trt.php">
 <div class="lettreMenu" width="1%">+</div>
 Ajouter<br>Traitement
@@ -51,6 +47,11 @@ Ajouter<br>Traitement
 <a class="menu" href="consulterTraitementsCorbeille.php">
 <img style="margin-top:5px;" width="35px" src="../img/corbeille.png"><br>
 Voir la<br>corbeille
+</a>
+<br>
+<a class="menu" href="exportTraitementsCSV.php">
+<img style="margin-top:10px;" src="../img/csv_p.png"><br>
+Export CSV
 </a>
 </div>
 
@@ -81,9 +82,6 @@ Voir la<br>corbeille
 			?>
 		</select>
 		&nbsp;&nbsp;Rechercher : <input type="text" value="<?php echo $rechercheFiltre;?>" onchange="javascript:window.location='consulterTraitements_trt.php?recherche=' + this.value;" size="12">
-	</td>
-	<td align="right">
-		<a href="exportTraitementsCSV.php">Export CSV</a>
 	</td>
 </tr>
 </table>

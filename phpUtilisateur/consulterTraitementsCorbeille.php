@@ -1,7 +1,6 @@
 ﻿<?php
 	require "inc_commun.php";
 	require "header_et_menu.php";
-	$champs=champ::charger(); // TODO : à supprimer ! Inutile de recharger cela à chaque fois
 	// Chargement des données
 	$traitements = traitement::charger($champs, 'O');
 ?>

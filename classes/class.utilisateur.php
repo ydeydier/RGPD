@@ -8,7 +8,6 @@ class utilisateur {
 	var $prenom;
 	var $administrateur;	// 'O' ou 'N'
 	
-	// TODO: LDAP, vérifier
 	static function chargerDepuisBDD($login) {
 		$login=strtolower(trim($login));
 		$result = executeSqlSelect("SELECT * FROM utilisateur where lower(trim(login))='$login'");
