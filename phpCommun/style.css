@@ -240,6 +240,6 @@ img  {
 
 .divMenuGauche {
 	position:fixed;
-	left:10px;
-	top:300px;
+	right:10px;
+	top:150px;
 }

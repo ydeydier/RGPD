@@ -37,7 +37,7 @@ function envoyerCorbeille(idTraitement) {
 	}
 }
 </script>
-<!-- Menu gauche -->
+<!-- ****************************** Menu ****************************** -->
 <div class="divMenuGauche">
 <a class="menu" href="ajouterTraitement_trt.php">
 <div class="lettreMenu" width="1%">+</div>
@@ -55,14 +55,15 @@ Export CSV
 </a>
 </div>
 
-<!-- Corps de la page -->
+<!-- ****************************** Corps de la page ****************************** -->
 <CENTER>
 
 <br><br><br>
 <h1>Liste des traitements</h1>
 <br><br>
 
-<table width="70%">
+<!-- Filtre -->
+<table width="80%">
 <tr>
 	<td>
 		Service &nbsp;
@@ -72,12 +73,14 @@ Export CSV
 			$intituleServices = intitule::getIntitules("SERVICE", $intitules);
 			foreach ($intituleServices as $intitule) {
 				$libelleIntitule=$intitule->libelle;
-				if ($serviceFiltre==$libelleIntitule) {
-					$selected="SELECTED";
-				} else {
-					$selected="";
+				if (substr($libelleIntitule,0,2)!="~~") {
+					if ($serviceFiltre==$libelleIntitule) {
+						$selected="SELECTED";
+					} else {
+						$selected="";
+					}
+					echo "<option $selected value=\"$libelleIntitule\">$libelleIntitule</option>";
 				}
-				echo "<option $selected value=\"$libelleIntitule\">$libelleIntitule</option>";
 			}
 			?>
 		</select>
@@ -87,8 +90,8 @@ Export CSV
 </table>
 
 <br>
-
-<table width="70%" class="tableCommune">
+<!-- Liste des traitements -->
+<table width="80%" class="tableCommune">
 <?php
 	// Ligne de titre
 	echo "<tr>";

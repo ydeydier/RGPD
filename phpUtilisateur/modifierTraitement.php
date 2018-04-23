@@ -43,8 +43,7 @@ function listeChanged(laListe) {
 <h1><?php echo $donnees['nom'];?></h1>
 <br><br><br>
 
-
-<!-- Menu gauche -->
+<!-- ****************************** Corps de la page ****************************** -->
 <div class="divMenuGauche">
 <a class="menu" style="cursor:pointer;" onclick="javascript:document.formModfif.submit();">
 <img style="margin-top:10px;margin-bottom:4px;" src="../img/validation_p.png"><br>
@@ -57,7 +56,7 @@ Annuler
 </a>
 </div>
 
-<!-- Corps de la page -->
+<!-- ****************************** Corps de la page ****************************** -->
 <form name="formModfif" method="POST" action="modifierTraitement_trt.php">
 <table width="50%" class="tableCommune">
 <?php

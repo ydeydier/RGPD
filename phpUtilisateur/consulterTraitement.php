@@ -6,7 +6,7 @@
 	$donnees=$traitement->donnees;
 ?>
 <CENTER>
-<!-- Menu gauche -->
+<!-- ****************************** Menu ****************************** -->
 <div class="divMenuGauche">
 <a class="menu" href="modifierTraitement.php?id=<?php echo $traitement->idTraitement;?>&actionAnnuler=consulterUnitaire">
 <img style="margin-top:12px;" width="35px" src="../img/editOriginale.png"><br>
@@ -19,7 +19,7 @@ Liste des<br>traitements
 <br>
 </div>
 
-<!-- Corps de la page -->
+<!-- ****************************** Corps de la page ****************************** -->
 <br><br><br>
 <h1>Traitement : <?php echo $donnees['nom'];?></h1>
 <br><br><br>

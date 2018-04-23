@@ -11,7 +11,7 @@ function restaurerDepuisCorbeille(idTraitement) {
 	}
 }
 </script>
-<!-- Menu gauche -->
+<!-- ****************************** Menu ****************************** -->
 <div class="divMenuGauche">
 <a class="menu" href="consulterTraitements.php">
 <img style="margin-top:12px;" width="30px" src="../img/menu.png"><br>
@@ -19,7 +19,7 @@ Liste des<br>traitements
 </a>
 </div>
 
-<!-- Corps de la page -->
+<!-- ****************************** Corps de la page ****************************** -->
 <CENTER>
 <br><br><br>
 <h1>Liste des traitements en corbeille</h1>
