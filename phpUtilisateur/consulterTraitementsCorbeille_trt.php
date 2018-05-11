@@ -5,7 +5,7 @@
 		$action=$_GET["action"];
 		$idTraitement=$_GET["idTraitement"];
 		if ($action=="Restaurer") {
-			$traitement = traitement::chargerAvecId($idTraitement, $champs);
+			$traitement = traitement::chargerAvecId($idTraitement, $champs, $services);
 			$traitement->restaurerDepuisCorbeille();
 		}
 	}

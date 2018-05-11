@@ -3,6 +3,8 @@
 	//error_reporting(E_ALL ^ E_DEPRECATED);
 	require_once "../phpCommun/fonctionsSql.php";
 	require_once "../classes/class.champ.php";
+	require_once "../classes/class.direction.php";
+	require_once "../classes/class.service.php";
 	require_once "../classes/class.categorie.php";
 	require_once "../classes/class.intitule.php";
 	require_once "../classes/class.traitement.php";
@@ -17,4 +19,6 @@
 	$champs=$_SESSION["champs"];
 	$categories=$_SESSION["categories"];
 	$intitules=$_SESSION["intitules"];
+	$directions=$_SESSION["directions"];
+	$services=$_SESSION["services"];
 ?>

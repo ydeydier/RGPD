@@ -31,22 +31,5 @@ class intitule {
 		}
 		return $ret;
 	}
-
-	static function existe($type, $libelle, $intitules) {
-		$bExiste=false;
-		foreach ($intitules as $intitule) {
-			if ($intitule->type==$type) {
-				if ($intitule->libelle==$libelle) {
-					$bExiste=true;
-					break;
-				}
-			}
-		}
-		return $bExiste;
-	}
-	
-	static function ajoute($type, $libelle) {
-		executeSql("insert into intitule(ordre, type, libelle) values (0, '$type', '$libelle')");
-	}	
 }
 ?>

@@ -2,7 +2,7 @@
 header("Content-Type: text/csv; charset=utf-8;");
 header("Content-disposition: attachment; filename=TraitementsRGPD_".date("d_m_Y").".csv");
 require "inc_commun.php";
-$traitements = traitement::charger($champs, 'N');
+$traitements = traitement::charger($champs, 'N', $services);
 $delimiteur=";";
 
 // Fichier output
@@ -21,7 +21,12 @@ foreach ($traitements as $traitement) {
 	$donnees=$traitement->donnees;
 	$csvLine=array();
 	foreach ($champs as $champ) {
-		$donnee=$donnees[$champ->nomChamp];
+		if ($champ->typeInterface=='S') {
+			if ($champ->typeListe=='SERVICE')   $donnee=$traitement->libelleService();
+			if ($champ->typeListe=='DIRECTION') $donnee=$traitement->libelleDirection();
+		} else {
+			$donnee=$donnees[$champ->nomChamp];
+		}
 		$csvLine[]=$donnee;
 	}
 	fputcsv($out, $csvLine, $delimiteur);

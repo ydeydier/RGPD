@@ -1,18 +1,20 @@
 <?php
 	require "inc_commun.php";
 	require "header_et_menu.php";
-	// Gestion du filtre "service"
-	$serviceFiltre="Tous";
-	if (isset($_SESSION['service'])) {
-		$serviceFiltre=$_SESSION["service"];
+	// Gestion du filtre "direction"
+	$idDirectionFiltre="Tous";
+	if (isset($_SESSION['filtre_direction'])) {
+		$idDirectionFiltre=$_SESSION["filtre_direction"];
 	}
+
 	// Gestion du filtre "recherche textuelle"
 	$rechercheFiltre="";
 	if (isset($_SESSION['recherche'])) {
 		$rechercheFiltre=$_SESSION["recherche"];
 	}
 	// Chargement des données
-	$traitements = traitement::charger($champs, 'N');
+	$traitements = traitement::charger($champs, 'N', $services);
+
 	// Gestion du tri
 	$tri="reference";
 	if (isset($_SESSION["tri"])) {
@@ -36,6 +38,24 @@ function envoyerCorbeille(idTraitement) {
 		window.location="consulterTraitements_trt.php?action=Supprimer&idTraitement=" + idTraitement;
 	}
 }
+
+// La fonction suivante, spécifique à IE, permet de provoquer l'appel du "onchange" de l'input "Rechercher" (filtre) lorsque ENTER est pressée (ce qui est automatique sur Chrome et FF)
+function checkEnter(event) {
+   var keynum;
+   var keychar;
+   var enttest;
+   if (window.event) {
+      keynum = event.keyCode;
+   } else {
+      if (event.which) {
+         keynum = event.which;
+         }
+   }
+   if (keynum==13) {
+      event.srcElement.blur();
+      return false;
+   }
+}
 </script>
 <!-- ****************************** Menu ****************************** -->
 <div class="divMenuGauche">
@@ -53,6 +73,12 @@ Voir la<br>corbeille
 <img style="margin-top:10px;" src="../img/csv_p.png"><br>
 Export CSV
 </a>
+<br>
+<a class="menu" href="modifierDirectionsEtServices.php">
+<div class="lettreMenu" width="1%">S</div>
+Modifier<br>Services
+</a>
+</div>
 </div>
 
 <!-- ****************************** Corps de la page ****************************** -->
@@ -66,25 +92,24 @@ Export CSV
 <table width="80%">
 <tr>
 	<td>
-		Service &nbsp;
-		<select onchange="javascript:window.location='consulterTraitements_trt.php?service=' + this.value;">
-		<option <?php echo ($serviceFiltre=="Tous"?" selected":""); ?> value="Tous">Tous</option>
+		Direction &nbsp;
+		<select onchange="javascript:window.location='consulterTraitements_trt.php?direction=' + this.value;">
+		<option <?php echo ($idDirectionFiltre=="Tous"?" selected":""); ?> value="Tous">-- Toutes --</option>
 			<?php
-			$intituleServices = intitule::getIntitules("SERVICE", $intitules);
-			foreach ($intituleServices as $intitule) {
-				$libelleIntitule=$intitule->libelle;
-				if (substr($libelleIntitule,0,2)!="~~") {
-					if ($serviceFiltre==$libelleIntitule) {
-						$selected="SELECTED";
-					} else {
-						$selected="";
-					}
-					echo "<option $selected value=\"$libelleIntitule\">$libelleIntitule</option>";
+			foreach ($directions as $direction) {
+				$libelleDirection=$direction->libelle;
+				$idDirection=$direction->idDirection;
+				if ($idDirectionFiltre==$idDirection) {
+					$selected="SELECTED";
+				} else {
+					$selected="";
 				}
+				echo "<option $selected value=\"$idDirection\">$libelleDirection</option>";
 			}
 			?>
+		<option <?php echo ($idDirectionFiltre=="Vide"?" selected":""); ?> value="Vide">-- Vide --</option>
 		</select>
-		&nbsp;&nbsp;Rechercher : <input type="text" value="<?php echo $rechercheFiltre;?>" onchange="javascript:window.location='consulterTraitements_trt.php?recherche=' + this.value;" size="12">
+		&nbsp;&nbsp;Rechercher : <input type="text" value="<?php echo $rechercheFiltre;?>" onchange="javascript:window.location='consulterTraitements_trt.php?recherche=' + this.value;" onkeypress="checkEnter(event);" size="12">
 	</td>
 </tr>
 </table>
@@ -107,7 +132,9 @@ Export CSV
 	foreach ($traitements as $traitement) {
 		$donnees=$traitement->donnees;
 		// Gestion du filtre
-		if ($serviceFiltre==($donnees["service"]) || ($serviceFiltre=="Tous")) {
+		$idDirection=$traitement->idDirection();
+		if ($idDirection==null) $idDirection="Vide";
+		if (($idDirectionFiltre==$idDirection) || ($idDirectionFiltre=="Tous")) {
 			$bAfficherLigne=true;
 			if ($rechercheFiltre!="") {
 				$bAfficherLigne=false;
@@ -125,8 +152,17 @@ Export CSV
 				echo "<tr style=\"cursor:pointer;\" onclick=\"window.location='consulterTraitement.php?id=$traitement->idTraitement'\">";
 				foreach ($champs as $champ) {
 					if ($champ->bAfficheDansListe()) {
-						$donnee=$donnees[$champ->nomChamp];
-						$donnee=str_replace("\n", "<br>", $donnee);
+						if ($champ->typeInterface=='S') {
+							if ($champ->typeListe=='SERVICE') {
+								$donnee=$traitement->libelleService();
+							}
+							if ($champ->typeListe=='DIRECTION') {
+								$donnee=$traitement->libelleDirection();
+							}
+						} else {
+							$donnee=$donnees[$champ->nomChamp];
+							$donnee=str_replace("\n", "<br>", $donnee);
+						}
 						echo "<td>$donnee</td>";
 					}
 				}

@@ -4,9 +4,9 @@
 	if (isset($_GET['tri'])) {
 		$_SESSION["tri"]=$_GET['tri'];
 	}
-	// Gestion du filtre "service"
-	if (isset($_GET['service'])) {
-		$_SESSION["service"]=$_GET['service'];
+	// Gestion du filtre "direction"
+	if (isset($_GET['direction'])) {
+		$_SESSION["filtre_direction"]=$_GET['direction'];
 	}
 	// Gestion du filtre "recherche textuelle"
 	if (isset($_GET['recherche'])) {
@@ -17,7 +17,7 @@
 		$action=$_GET["action"];
 		$idTraitement=$_GET["idTraitement"];
 		if ($action=="Supprimer") {
-			$traitement = traitement::chargerAvecId($idTraitement, $champs);
+			$traitement = traitement::chargerAvecId($idTraitement, $champs, $services);
 			$traitement->envoyerCorbeille();
 		}
 	}

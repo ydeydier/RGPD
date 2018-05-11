@@ -2,7 +2,7 @@
 	require "inc_commun.php";
 	require "header_et_menu.php";
 	// Chargement des données
-	$traitements = traitement::charger($champs, 'O');
+	$traitements = traitement::charger($champs, 'O', $services);
 ?>
 <script type="text/javascript">
 function restaurerDepuisCorbeille(idTraitement) {
@@ -42,7 +42,17 @@ Liste des<br>traitements
 		echo "<tr style=\"cursor:pointer;\" onclick=\"window.location='consulterTraitement.php?id=$traitement->idTraitement'\">";
 		foreach ($champs as $champ) {
 			if ($champ->bAfficheDansListe()) {
-				$donnee=$donnees[$champ->nomChamp];
+				if ($champ->typeInterface=='S') {
+					if ($champ->typeListe=='SERVICE') {
+						$donnee=$traitement->libelleService();
+					}
+					if ($champ->typeListe=='DIRECTION') {
+						$donnee=$traitement->libelleDirection();
+					}
+				} else {
+					$donnee=$donnees[$champ->nomChamp];
+					$donnee=str_replace("\n", "<br>", $donnee);
+				}
 				echo "<td>$donnee</td>";
 			}
 		}

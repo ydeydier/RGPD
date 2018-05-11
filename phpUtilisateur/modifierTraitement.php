@@ -3,7 +3,7 @@
 	require "header_et_menu.php";
 	$idTraitement=$_GET["id"];
 	$actionAnnuler=$_GET["actionAnnuler"];
-	$traitement = traitement::chargerAvecId($idTraitement, $champs);	// la base est lue à nouveau de manière à s'assurer de visualiser la dernière version
+	$traitement = traitement::chargerAvecId($idTraitement, $champs, $services);	// la base est lue à nouveau de manière à s'assurer de visualiser la dernière version
 	$donnees=$traitement->donnees;
 	$_SESSION["traitement"]=$traitement;		// variable de session utilisée uniquement sur cette page et modifierTraitement_trt.php
 	// Lien en cas d'annulation
@@ -19,33 +19,9 @@
 			break;
 	}
 ?>
-<CENTER>
-
-<script type="text/javascript">
-function listeChanged(laListe) {
-	valeur=laListe.value;
-	nomChamp = laListe.getAttribute("data-nomChamp");
-	leSpan=document.getElementById("ID_" + nomChamp + "_SPAN_AJOUT");
-	leInput=leSpan.children[1];
-	if (valeur.substr(0, 2)=="~~") {
-		leSpan.setAttribute("class", "montre");
-		laListe.name="";
-		leInput.name="txt_" + nomChamp;
-	} else {
-		leSpan.setAttribute("class", "cache");
-		laListe.name="txt_" + nomChamp;
-		leInput.name="";
-	}
-}
-</script>
-
-<br><br><br>
-<h1><?php echo $donnees['nom'];?></h1>
-<br><br><br>
-
-<!-- ****************************** Corps de la page ****************************** -->
+<!-- ****************************** Menu ****************************** -->
 <div class="divMenuGauche">
-<a class="menu" style="cursor:pointer;" onclick="javascript:document.formModfif.submit();">
+<a class="menu" style="cursor:pointer;" onclick="javascript:document.formModif.submit();">
 <img style="margin-top:10px;margin-bottom:4px;" src="../img/validation_p.png"><br>
 Valider
 </a>
@@ -57,13 +33,17 @@ Annuler
 </div>
 
 <!-- ****************************** Corps de la page ****************************** -->
-<form name="formModfif" method="POST" action="modifierTraitement_trt.php">
+<CENTER>
+<br><br><br>
+<h1><?php echo $donnees['nom'];?></h1>
+<br><br><br>
+<form name="formModif" method="POST" action="modifierTraitement_trt.php">
 <table width="50%" class="tableCommune">
 <?php
 	$libelleCategoriePrecedent="";
 	foreach ($champs as $champ) {
 		$nomChamp=$champ->nomChamp;
-		$donnee=$donnees[$nomChamp];
+		// Libellé et descrition
 		$libelle=$champ->libelleChamp;
 		$description=$champ->description;
 		$description=str_replace("\n", "<br>", $description);
@@ -76,9 +56,11 @@ Annuler
 			echo "<tr height=\"30px\"><th class=\"categorie\" colspan=\"2\">$libelleCategorie$descriptionCategorie</th></tr>";
 			$libelleCategoriePrecedent=$libelleCategorie;
 		}
-		// TODO: utiliser éventuellement le champ tailleMax
+		// TODO: utiliser le champ tailleMax
 		$typeInterface=$champ->typeInterface;
-		
+		// Données du traitement
+		$donnee=$donnees[$nomChamp];
+		// Cas particulier : référence
 		if ($nomChamp=="reference") {
 			$long="15";
 			$refInterne="REF_".$traitement->idTraitement;
@@ -88,7 +70,6 @@ Annuler
 			$long="40";
 			$texteApres="";
 		}
-		
 		// Champ de type "Ligne (une unique ligne de texte)"
 		if ($typeInterface=="U") {
 			$donnee=htmlspecialchars($donnee);
@@ -99,10 +80,10 @@ Annuler
 			$donnee=htmlspecialchars($donnee);
 			$HTMLchamp="<textarea rows=\"3\" cols=\"40\" name=\"txt_$nomChamp\">$donnee</textarea>";
 		}
-		// Champ de type "Liste"
+		// Champ de type "Liste" : liste d'intitulés
 		if ($typeInterface=="L") {
 			$typeListe=$champ->typeListe;
-			$HTMLchamp ="<select onchange=\"listeChanged(this)\" data-nomChamp=\"$nomChamp\" name=\"txt_$nomChamp\">";
+			$HTMLchamp ="<select name=\"txt_$nomChamp\">";
 			$HTMLchamp.="<option value=\"\"> - </option>";
 			$intitulesChamp = intitule::getIntitules($typeListe, $intitules);
 			foreach ($intitulesChamp as $intitule) {
@@ -115,8 +96,31 @@ Annuler
 				$HTMLchamp.="<option $selected value=\"$libelleIntitule\">$libelleIntitule</option>";
 			}
 			$HTMLchamp.="</select>";
-			// Eventuel champ d'ajout
-			$HTMLchamp.="<span class=\"cache\" id=\"ID_$nomChamp"."_SPAN_AJOUT\" ><br>Ajouter : <input style=\"margin-top:5px;\" type=\"text\"></span>";
+		}
+		// Champ de type "Spécifique"
+		if ($typeInterface=="S") {
+			$typeListe=$champ->typeListe;
+			if ($typeListe=='SERVICE') {
+				$service=$traitement->service;
+				$HTMLchamp ="<select name=\"idService\">";
+				$HTMLchamp.="<option value=\"\"> - </option>";
+				foreach ($services as $unService) {
+					$libelleService=$unService->libelle;
+					$libelleDirection=$unService->direction->libelle;
+					$idService=$unService->idService;
+					if ($idService==$service->idService) {
+						$selected="SELECTED";
+					} else {
+						$selected="";
+					}
+					$HTMLchamp.="<option $selected value=\"$idService\">$libelleDirection - $libelleService</option>";
+				}
+				$HTMLchamp.="</select>";
+			}
+			if ($typeListe=='DIRECTION') {
+				$donnee=$traitement->service->direction->libelle;
+				$HTMLchamp=$donnee;
+			}
 		}
 		// Champ de type "Date"
 		if ($typeInterface=="D") {

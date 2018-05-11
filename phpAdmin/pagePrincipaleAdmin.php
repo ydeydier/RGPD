@@ -5,11 +5,17 @@
 
 <CENTER>
 <br><br><br><br><br><br><br>
-<a class="menu" href="consulterChamps.php">Gérer les champs</a><br>
+
+<a class="menu" href="consulterChamps.php">
+<div class="lettreMenu" width="1%">C</div>
+Gérer les champs
+</a>
 <br>
-<a class="menu" href="consulterIntitules.php">Gérer les intitulés</a><br>
-<br>
-<a class="menu" href="consulterConnexions.php">Historique des connexions</a><br>
+<a class="menu" href="consulterConnexions.php">
+<div class="lettreMenu" width="1%">H</div>
+Historique<br>connexions
+</a>
+
 </CENTER>
 <?php
 	require "footer.php";

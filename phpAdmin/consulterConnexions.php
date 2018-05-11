@@ -25,8 +25,10 @@
 ?>
 </table>
 <br><br><br><br>
-<a class="menu" href="pagePrincipaleAdmin.php">Retour Page Accueil Administration</a>
-
+<a class="menu" href="pagePrincipaleAdmin.php">
+<div class="lettreMenu" width="1%"><-</div>
+Retour
+</a>
 </CENTER>
 <br><br><br><br>
 <?php

@@ -9,7 +9,7 @@
 <br>
 
 <table width="80%" class="tableCommune">
-<tr><th>Nom</th><th>Ordre</th><th>Libelle</th><th>Description</th><th>Type Interface<br>(U=une ligne, M=multilignes,<br>D=Date, L=Liste)</th><th>Type liste</th><th>Taille max</th><th>Afficher dans liste</th><th>Categorie</th><th>Masqué</th><th>Modif.</th></tr>
+<tr><th>Nom</th><th>Ordre</th><th>Libelle</th><th>Description</th><th>Type Interface<br>(U=une ligne, M=multilignes,<br>D=Date, L=Liste, S=Spécifique)</th><th>Type liste (pour Type Interface L ou S)</th><th>Taille max</th><th>Afficher dans liste</th><th>Categorie</th><th>Masqué</th><th>Modif.</th></tr>
 <?php
 	$champs = champ::charger();
 	foreach ($champs as $champ) {
@@ -31,7 +31,11 @@
 ?>
 </table>
 <br><br><br><br>
-<a class="menu" href="pagePrincipaleAdmin.php">Retour Page Accueil Administration</a>
+
+<a class="menu" href="pagePrincipaleAdmin.php">
+<div class="lettreMenu" width="1%"><-</div>
+Retour
+</a>
 
 </CENTER>
 <br><br><br><br>

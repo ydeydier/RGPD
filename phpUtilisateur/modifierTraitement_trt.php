@@ -5,8 +5,20 @@
 	foreach ($champs as $champ) {
 		$nomChamp=$champ->nomChamp;
 		$typeInterface=$champ->typeInterface;
-		$donnee=$_POST["txt_$nomChamp"];
-		$donnees[$nomChamp]=$donnee;
+		if ($typeInterface=="S") {
+			$typeListe=$champ->typeListe;
+			if ($typeListe=='SERVICE') {
+				$idService=$_POST["idService"];
+				if ($idService!="") {
+					$traitement->service=$services[$idService];
+				} else {
+					$traitement->service=null;
+				}
+			}
+		} else {
+			$donnee=$_POST["txt_$nomChamp"];
+			$donnees[$nomChamp]=$donnee;
+		}
 	}
 	$traitement->update($champs, $utilisateur->login, $intitules);
 	// Un intitulé peut avoir été ajouté, il convient donc de les recharger

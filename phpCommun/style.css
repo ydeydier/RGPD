@@ -202,16 +202,6 @@ img  {
       to { opacity: 1; }
 }
 
-.cache {
-	display:none;
-}
-
-.montre {
-	display:inline;
-	animation-name: fadeIn;
-	animation-duration: 1s;
-}
-
 .titrePage {
 	font-size:14px;
 }

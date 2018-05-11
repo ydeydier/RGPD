@@ -3,6 +3,8 @@
 	require_once "../phpCommun/fonctionsSql.php";
 	require_once "../classes/class.categorie.php";
 	require_once "../classes/class.champ.php";
+	require_once "../classes/class.direction.php";
+	require_once "../classes/class.service.php";
 	require_once "../classes/class.utilisateur.php";
 	require_once "../classes/class.intitule.php";
 	session_start();
@@ -52,13 +54,17 @@
 		$_SESSION["estConnecte"]="OUI";
 		$_SESSION["utilisateur"]=$utilisateur;
 		$utilisateur->logConnexion();
-		// Charge l'ensemble des champs et catégories, et les stocke en session (array d'instances de 'champ' et de 'categorie')
+		// Charge l'ensemble du paramétrage, et le stock en session
 		$champs=champ::charger();
 		$categories=categorie::charger();
 		$intitules=intitule::charger();
+		$directions=direction::charger();
+		$services=service::charger($directions);
 		$_SESSION["champs"]=$champs;
 		$_SESSION["categories"]=$categories;
 		$_SESSION["intitules"]=$intitules;
+		$_SESSION["directions"]=$directions;
+		$_SESSION["services"]=$services;
 	} else {
 		$redirigeVers="../phpCommun/login.php?erreur=loginPasswordIncorrects";
 	}

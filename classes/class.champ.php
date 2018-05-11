@@ -4,7 +4,7 @@ class champ {
 	var $ordre;
 	var $libelleChamp;
 	var $description;
-	var $typeInterface;	// U=une ligne, M=multilignes, D=Date, L=Liste (liste définie par $typeListe)
+	var $typeInterface;	// U=une ligne, M=multilignes, D=Date, L=Liste d'intitulés (liste définie par $typeListe), S=Spécifique (défini par $typeListe)
 	var $typeListe;
 	var $tailleMax;
 	var $afficheDansListe;

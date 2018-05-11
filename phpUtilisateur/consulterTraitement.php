@@ -2,7 +2,7 @@
 	require "inc_commun.php";
 	require "header_et_menu.php";
 	$idTraitement=$_GET["id"];
-	$traitement = traitement::chargerAvecId($idTraitement, $champs);	// la base est lue à nouveau de manière à s'assurer de visualiser la dernière version
+	$traitement = traitement::chargerAvecId($idTraitement, $champs, $services);	// la base est lue à nouveau de manière à s'assurer de visualiser la dernière version
 	$donnees=$traitement->donnees;
 ?>
 <CENTER>
@@ -28,8 +28,15 @@ Liste des<br>traitements
 <?php
 	$libelleCategoriePrecedent="";
 	foreach ($champs as $champ) {
-		$donnee=$donnees[$champ->nomChamp];
-		$donnee=str_replace("\n", "<br>", $donnee);
+		// Données du traitement
+		if ($champ->typeInterface=='S') {
+			if ($champ->typeListe=='SERVICE')   $donnee=$traitement->libelleService();
+			if ($champ->typeListe=='DIRECTION') $donnee=$traitement->libelleDirection();
+		} else {
+			$donnee=$donnees[$champ->nomChamp];
+			$donnee=str_replace("\n", "<br>", $donnee);
+		}
+		// Libellé et descrition
 		$libelle=$champ->libelleChamp;
 		$description=$champ->description;
 		$description=str_replace("\n", "<br>", $description);

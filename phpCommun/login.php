@@ -23,6 +23,7 @@
 <tr height="30%" style="BACKGROUND:#FFFFFF;">
 <td>
 	<?php echo $messageLoginIncorrect;?>
+	<!-- <b style="color:#FF0000;">ATTENTION LE SITE EST EN COURS DE MAINTENANCE.<br>MERCI DE NE PAS L'UTILISER AUJOURD'HUI (Mercredi 09/05/2018)</b> -->
 	<br><br>
 	<form method="POST" action="login_trt.php">
 	<table align="center" cellpadding="5px">
