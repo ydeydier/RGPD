@@ -65,29 +65,26 @@ class utilisateur {
 		return ($this->administrateur=="O");
 	}
 
-	/*
-	function update() {
-		$sql="update utilisateur set nom='".mysqlEscape($this->nom)."', prenom='".mysqlEscape($this->prenom)."', password='".mysqlEscape($this->password)."' where idUtilisateur=$this->idUtilisateur";
-		executeSql($sql);
-	}
-
-	function insert() {
-		$sql="insert into utilisateur (nom, prenom, login, password) value ('".mysqlEscape($this->nom)."', '".mysqlEscape($this->prenom)."', '".mysqlEscape($this->login)."', '".mysqlEscape($this->password)."')";
-		executeSql($sql);
-	}
-	
-	static function delete($idUtilisateur) {
-		$sql="delete from utilisateur where idUtilisateur=$idUtilisateur";
-		executeSql($sql);
-	}
-	*/
 	function logConnexion() {
 		$sql="insert into connexion (login) value ('".mysqlEscape($this->login)."')";
 		executeSql($sql);
 	}
-	function chargeConnexions() {
+	function chargeConnexions($filtre) {
 		$connexions = array();
-		$result = executeSqlSelect("SELECT * FROM connexion order by timestamp desc");
+		$sql="SELECT * FROM connexion";
+		if ($filtre!="") {
+			$listeLogin="";
+			$aFiltre=explode(" ", $filtre);
+			foreach ($aFiltre as $login) {
+				if ($login!="") {
+					$listeLogin.=$sep."'$login'";
+					$sep=" ,";
+				}
+			}
+			$sql.=" where login not in ($listeLogin)";
+		}
+		$sql.=" order by timestamp desc";
+		$result = executeSqlSelect($sql);
 		while($row = mysqli_fetch_array($result)) {
 			$connexions[]=array("login"=>$row["login"], "timestamp"=>$row["timestamp"]);
 		}

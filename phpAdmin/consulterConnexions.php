@@ -11,7 +11,9 @@
 <table width="20%" class="tableCommune">
 <tr><th>Login</th><th>Timestamp</th></tr>
 <?php
-	$connexions=utilisateur::chargeConnexions();
+	$filtre=$_SESSION["filtre_connexions"];
+	if (!isset($filtre)) $filtre="";
+	$connexions=utilisateur::chargeConnexions($filtre);
 	foreach ($connexions as $connexion) {
 		$login=$connexion["login"];
 		$timestamp=$connexion["timestamp"];
@@ -24,6 +26,10 @@
 	}
 ?>
 </table>
+<br><br>
+<form action="consulterConnexions_trt.php" method="POST">
+Filtre : supprimer <input type="text" value="<?php echo htmlspecialchars($filtre);?>" placeholder="ex: admin ydurant" name="filtre">&nbsp;<input type="submit" value="Filtrer">
+</form>
 <br><br><br><br>
 <a class="menu" href="pagePrincipaleAdmin.php">
 <div class="lettreMenu" width="1%"><-</div>
