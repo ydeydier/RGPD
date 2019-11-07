@@ -56,8 +56,8 @@ Annuler
 			echo "<tr height=\"30px\"><th class=\"categorie\" colspan=\"2\">$libelleCategorie$descriptionCategorie</th></tr>";
 			$libelleCategoriePrecedent=$libelleCategorie;
 		}
-		// TODO: utiliser le champ tailleMax
 		$typeInterface=$champ->typeInterface;
+		$tailleMax=$champ->tailleMax;
 		// Données du traitement
 		$donnee=$donnees[$nomChamp];
 		// Cas particulier : référence
@@ -73,12 +73,12 @@ Annuler
 		// Champ de type "Ligne (une unique ligne de texte)"
 		if ($typeInterface=="U") {
 			$donnee=htmlspecialchars($donnee);
-			$HTMLchamp="<input size=\"$long\" type=\"text\" value=\"$donnee\" name=\"txt_$nomChamp\">$texteApres";
+			$HTMLchamp="<input maxlength=\"$tailleMax\" size=\"$long\" type=\"text\" value=\"$donnee\" name=\"txt_$nomChamp\">$texteApres";
 		}
 		// Champ de type "Multiligne"
 		if ($typeInterface=="M") {
 			$donnee=htmlspecialchars($donnee);
-			$HTMLchamp="<textarea rows=\"3\" cols=\"40\" name=\"txt_$nomChamp\">$donnee</textarea>";
+			$HTMLchamp="<textarea maxlength=\"$tailleMax\" rows=\"3\" cols=\"40\" name=\"txt_$nomChamp\">$donnee</textarea>";
 		}
 		// Champ de type "Liste" : liste d'intitulés
 		if ($typeInterface=="L") {
@@ -124,7 +124,7 @@ Annuler
 		}
 		// Champ de type "Date"
 		if ($typeInterface=="D") {
-			$HTMLchamp="<input size=\"10\" type=\"text\" value=\"$donnee\" name=\"txt_$nomChamp\"> (JJ/MM/AAAA)";
+			$HTMLchamp="<input maxlength=\"10\" size=\"10\" type=\"text\" value=\"$donnee\" name=\"txt_$nomChamp\"> (JJ/MM/AAAA)";
 		}
 		echo "<tr>";
 		echo "<th width=\"40%\" align=\"left\">$libelle<br><span class=\"description\">$description</span></th>";
